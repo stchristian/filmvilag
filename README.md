@@ -1,6 +1,7 @@
 # Filmvilag
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 7.3.8.
+## Intro
+This application was created as a homework for a course called _Client side technologies_. It uses a movie database api called [TMDB](https://www.themoviedb.org/).
 
 ## Prerequisites
 
