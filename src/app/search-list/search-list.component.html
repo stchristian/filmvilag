@@ -1,0 +1,71 @@
+<div class="row mt-4">
+  <div class="form-group col-md-5 col-12">
+    <input type="text" class="form-control" placeholder="Search for a movie, TV show or a person" [(ngModel)]="keyword" name="keyword">
+  </div>
+  <div class="form-group col-md-auto col-12">
+    <a [routerLink]="['/']" [queryParams]="{ search: keyword }" class="btn btn-primary btn-block">Search</a>
+    <!-- <button class="btn btn-primary btn-block" type="submit">Search</button> -->
+  </div>
+</div>
+<div class="row" *ngIf="searchResult; else noResult">
+  <div class="col-12 mb-3">
+    <nav aria-label="Page navigation example">
+      <ul class="pagination my-2 justify-content-center">
+        <li class="page-item"><a class="page-link" [routerLink]="" (click)="getPage(currentPage-1)">Previous</a></li>
+        <li class="page-item" *ngFor="let page of pages | slice:startingPage-1:startingPage+9" [class.active]="currentPage == page"><a
+            class="page-link" [routerLink]="['/']" [queryParams]="{ search: keyword, page: page }">{{page}}</a></li>
+        <li class="page-item"><a class="page-link" [routerLink]="" (click)="getPage(currentPage+1)">Next</a></li>
+      </ul>
+    </nav>
+    <!-- <p>Total Pages: {{searchResult.total_pages}}<br> Total Results: {{searchResult.total_results}}</p> -->
+  </div>
+  <div class="col-sm-6 col-md-3 mb-4" *ngFor="let item of searchResult.results">
+    <div *ngIf="item.media_type == 'movie'" class="card h-100 text-center">
+      <img *ngIf="item.poster_path; else notfound" class="card-img-top img-fluid" src="{{movieService.getImgUrl()}}/original{{item.poster_path}}"
+        alt="">
+      <div class="card-body">
+        <h4 class="card-title">{{item.title}} <br>
+          <small>Movie</small><br>
+        <small  class="text-muted">Average: {{item.vote_average}}</small></h4>
+        
+        
+      </div>
+      <div class="card-footer">
+        <a [routerLink]="['/movies', item.id]" class="btn btn-primary">Details</a>
+      </div>
+    </div>
+    <div *ngIf="item.media_type == 'tv'" class="card h-100 text-center">
+      <img *ngIf="item.poster_path; else notfound" class="card-img-top img-fluid" src="{{movieService.getImgUrl()}}/original{{item.poster_path}}"
+        alt="">
+      <div class="card-body">
+        <h4 class="card-title">{{item.original_name}}<br>
+          <small>Tv Show</small><br>
+        <small  class="text-muted">Average: {{item.vote_average}}</small></h4>
+        
+      </div>
+      <div class="card-footer">
+        <a [routerLink]="['/tv', item.id]" class="btn btn-primary">Details</a>
+      </div>
+    </div>
+    <div *ngIf="item.media_type == 'person'" class="card h-100 text-center">
+      <img *ngIf="item.profile_path; else notfound" class="card-img-top img-fluid" src="{{movieService.getImgUrl()}}/original{{item.profile_path}}">
+      <div class="card-body">
+        <h4 class="card-title" >{{item.name }}<br>
+          <small>Person</small>
+          </h4>
+      </div>
+      <div class="card-footer">
+          <a [routerLink]="['/person', item.id]" class="btn btn-primary">Details</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<ng-template #notfound><img class="card-img-top img-fluid" src="assets/notfound.png"></ng-template>
+<ng-template #noResult>
+  <div class="row my-4">
+    <div class="col text-center">
+      <h1>No results</h1>
+    </div>
+  </div>
+</ng-template>

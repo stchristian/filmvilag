@@ -1,0 +1,12 @@
+img {
+    max-height: 500px;
+}
+
+ul {
+    list-style: none;
+    padding-left: 15px;
+}
+
+.cast {
+    height: 240px;
+}

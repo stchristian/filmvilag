@@ -1,0 +1,14 @@
+.card {
+    /* transform: rotate(90deg);
+    transform-origin: right top; */
+}
+
+.popular-wrapper {
+    overflow-x: scroll;
+}
+.popular-movies-container {
+    /* width: 300px;
+    height: 200px; */
+    /* transform-origin: right top;
+    transform:rotate(-90deg); */
+}

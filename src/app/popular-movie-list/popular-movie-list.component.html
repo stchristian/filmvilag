@@ -1,0 +1,18 @@
+<div class="row justify-content-center" *ngIf="popularResponse">
+  <div class="col-12 my-3">
+    <h1 class="display-3">Top 10 movies of the day</h1>
+  </div>
+</div>
+<div *ngIf="popularResponse" class="row flex-row flex-nowrap popular-wrapper">
+  <div  class="col-3" *ngFor="let movie of popularResponse.results | slice:0:10">
+    <div class="card card-block" >
+      <img class="card-img-top" [src]="movie.poster_path" alt="Card image cap">
+      <div class="card-body">
+        <h5 class="card-title text-truncate">{{movie.original_title || movie.original_name}}</h5>
+      </div>
+      <div class="card-footer">
+        <a [routerLink]="['/movies', movie.id]" class="btn btn-primary">Details</a>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,17 @@
+<div *ngIf="person" class="my-4">
+    <div class="row align-items-center">
+        <div class="col-md-5">
+            <img *ngIf="person.profile_path; else notfound" class="img-fluid" src="{{movieDbService.imgUrl}}/original{{person.profile_path}}" alt="">
+        </div>
+        <div class="col-md-7">
+            <h1 class="display-3">{{person.name}}<br> <small style="font-size:0.5em;"class="text-muted">Known for: {{person.known_for_department}}</small></h1>
+            
+            <p class="text-justify"*ngIf="person.biography != ''; else noBio">{{person.biography}}</p>
+        </div>
+    </div>
+    <ng-template #noBio>
+        <p>No biography available for this actor</p>
+    </ng-template>
+</div>
+
+<ng-template #notfound><img class="img-fluid" src="assets/notfound.png"></ng-template>

@@ -1,0 +1,23 @@
+<div *ngIf="movie" class="my-4">
+  <div class="row">
+    <div class="col-lg-5">
+      <img [src]="movie.poster_path" class="img-fluid">
+    </div>
+    <div class="col-lg-7">
+      <h1>{{movie.original_title}}<br><small class="text-muted"> {{movie.runtime}} minutes</small></h1>
+      <p>{{movie.overview}}</p>
+      <h3>Genres</h3>
+      <ul>
+        <li *ngFor="let genre of movie.genres">
+          {{genre.name}}
+        </li>
+      </ul>
+      <h4>Cast</h4>
+      <ul>
+        <li *ngFor="let person of movie.credits.cast | slice:castStartingIndex:castStartingIndex+castPageSize">{{person.character}}
+          | <a [routerLink]="['/person', person.id]">{{person.name}}</a></li>
+      </ul>
+      <button class="btn btn-primary mx-2" (click)="prevCast()">Previous</button> <button class="btn btn-primary" (click)="nextCast()">Next</button>
+    </div>
+  </div>
+</div>
